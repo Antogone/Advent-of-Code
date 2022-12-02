@@ -1,6 +1,6 @@
 import os
 
-os.chdir("/Users/anto/Desktop/Advent of Code/Advent-of-Code/JOUR 1")
+os.chdir("/Users/anto/Desktop/Advent of Code/Advent-of-Code/JOUR 2")
 
 with open("input.txt", "r") as variable:
   contenu = variable.readlines()
