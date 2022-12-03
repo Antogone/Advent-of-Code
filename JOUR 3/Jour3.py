@@ -35,21 +35,17 @@ with open("input2.txt", "r") as variable:
   contenu2 = variable.readlines()
 
 beta = []
-commu1=[]
-commu2=[]
+
 for i in range(0,len(contenu2),3):
   p1 = contenu[i].replace("\n","")
   p2 = contenu[i+1].replace("\n","")
   p3 = contenu[i+2].replace("\n","")
-  p4 = p2 + "-"+ p3
-  print(p4, p1)
 
+  val = -1
   for j in range(len(p1)):
-    if (p2.find(p1[j]) != -1):
-      commu1.append(p1[j])
-      print(p4.count(p1[j]))
-      # print(badge)
-      # beta.append(badge)
+    if p2.find(p1[j]) != -1 and p3.find(p1[j]) != -1 and val < 0:
+      val = 1
+      beta.append(p1[j])
 
 
 valeur = 0
