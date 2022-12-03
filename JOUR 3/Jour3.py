@@ -30,13 +30,9 @@ for i in alpha:
 print("SUM ITEM",valeur)
 
 ####PUZZLE 2
-
-with open("input2.txt", "r") as variable:
-  contenu2 = variable.readlines()
-
 beta = []
 
-for i in range(0,len(contenu2),3):
+for i in range(0,len(contenu),3):
   p1 = contenu[i].replace("\n","")
   p2 = contenu[i+1].replace("\n","")
   p3 = contenu[i+2].replace("\n","")
