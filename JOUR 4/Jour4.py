@@ -4,13 +4,14 @@ import pandas as pd
 os.chdir("/Users/anto/Desktop/Advent of Code/Advent-of-Code/JOUR 4")
 data = pd.read_csv("input.txt")
 
-
+# PUZZLE 1
 data = data.assign(Zone1_Deb = str(None) ,
                        Zone1_Fin = str(None),
                        Zone2_Deb = str(None),
                        Zone2_Fin=str(None))
 
 val = 0
+val2 = 0
 for i in range(len(data)):
     data["Zone1_Deb"].loc[i] = int(str(data["Zone1"].loc[i].replace("\n","")).split("-")[0])
     data["Zone1_Fin"].loc[i] = int(str(data["Zone1"].loc[i].replace("\n","")).split("-")[1])
@@ -28,4 +29,13 @@ for i in range(len(data)):
             val = val +1
     elif(z1_d >= z2_d) and (z1_f <= z2_f):
             val = val +1
-print(val)
+
+
+    if (z1_d <= z2_d <= z1_f) or (z1_d <= z2_f <= z1_f):
+        val2 = val2 + 1
+    elif (z2_d <= z1_d <= z2_f) or (z2_d <= z1_f <= z2_f):
+        val2 = val2 + 1
+
+print("Valeur Puzzle 1 = ",val)
+print("Valeur Puzzle 2 = ",val2)
+
