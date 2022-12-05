@@ -9,8 +9,8 @@ with open("input.txt", "r") as variable:
   contenu = variable.readlines()
 
 alpha = []
-for i in range(len(contenu)):
-  texte = contenu[i].replace("\n","")
+for i in contenu:
+  texte = i.rstrip()
   mid = int(len(texte)/2)
   p1 = texte[0:mid]
   p2 = texte[mid:mid*2]
@@ -24,9 +24,9 @@ for i in range(len(contenu)):
 valeur = 0
 for i in alpha:
   if (i.islower()):
-    valeur =valeur + ord(i) - 96
+    valeur += ord(i) - 96
   else:
-    valeur = valeur + (ord(i) + 32 + 26)-96
+    valeur += (ord(i) + 32 + 26)-96
 print("SUM ITEM",valeur)
 
 ####PUZZLE 2
