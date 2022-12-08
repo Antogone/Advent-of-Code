@@ -1,5 +1,4 @@
 import os
-
 os.chdir("/Users/anto/Desktop/Advent of Code/Advent-of-Code/JOUR 7")
 
 def input_per_line(file: str):
