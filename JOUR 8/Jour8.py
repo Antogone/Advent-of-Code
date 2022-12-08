@@ -1,56 +1,111 @@
 import os
 os.chdir("/Users/anto/Desktop/Advent of Code/Advent-of-Code/JOUR 8")
 
-def input_per_line(file: str):
-    with open(file, 'r') as input_file:
-        return [line.rstrip() for line in input_file.readlines()]
+with open("input.txt") as f:
+    data = "\n".join([line.strip() for line in f])
 
-data = input_per_line("input.txt")
-print(data)
+def puzzl1():
+    input = [[int(i) for i in x] for x in data.split("\n")]
+    visible = set()
+    #Comme ça on supprime les lignes que l'on ajoute qui seront deja présente
 
-def num_visible_trees(grid):
-    num_rows = len(grid)
-    num_cols = len(grid[0])
-    num_visible_trees = 0
+    #LIGNE
+    for i in range(len(input)):
+        line = input[i]
+        max_tree = -1
 
-    for row in range(num_rows):
-        for col in range(num_cols):
+        #Premier sens
+        for j in range(len(line)):
+            tree = line[j]
+            if tree > max_tree:
+                visible.add((i, j))
+                max_tree = tree
+        max_tree = -1
 
-            tallest_row = max(map(int, grid[row]))
-            row_nb_tall = row
-            tallest_col = max(map(int, [grid[i][col] for i in range(num_rows)]))
-            col_nb_tall = col
+        #Deuxième sens
+        for j in range(len(line)-1, -1, -1):
+            tree = line[j]
+            if tree > max_tree:
+                visible.add((i, j))
+                max_tree = tree
 
-            print(tallest_row,tallest_col)
-            print(row_nb_tall,col_nb_tall)
+    # COLONE
+    for i in range(len(input)):
+        max_tree = -1
+
+        # PREMIER SENS
+        for j in range(len(input)):
+            tree = input[j][i]
+            #On inverse i et J
+
+            if tree > max_tree:
+                visible.add((j, i))
+                max_tree = tree
+        max_tree = -1
+
+        #DEUXIEME SENS
+        for j in range(len(input)-1, -1, -1):
+            tree = input[j][i]
+            if tree > max_tree:
+                visible.add((j, i))
+                max_tree = tree
+
+    print(len(visible))
 
 
-            if tallest_row != 0 and tallest_row != 98 and int(grid[row][col]) == tallest_row:
-                visible = True
-                for i in range(col):
-                    if int(grid[row][i]) >= tallest_row:
-                        visible = False
-                        break
-                if visible:
-                    num_visible_trees += 1
+def puzzle2():
+    input = [[int(i) for i in x] for x in data.split("\n")]
+    best = 0
+
+    for i in range(len(input)):
+
+        for j in range(len(input)):
+
+            score = 1
+            base_tree = input[i][j]
+            max_tree = 0
+
+            #LIGNE PREMIER SENS
+            for a in range(j+1, len(input)):
+                tree = input[i][a]
+                max_tree += 1
+                if tree >= base_tree:
+                   break
+
+            score *= max_tree
+            max_tree = 0
+
+            #Ligne deuxieme sens
+            for a in range(j-1, -1, -1):
+                tree = input[i][a]
+                max_tree += 1
+                if tree >= base_tree:
+                   break
+            score *= max_tree
+            max_tree = 0
 
 
-            if tallest_col != 0 and tallest_col != 98 and int(grid[row][col]) == tallest_col:
-                visible = True
-                for i in range(row):
-                    if int(grid[i][col]) >= tallest_col:
-                        visible = False
-                        break
-                if visible:
-                    num_visible_trees += 1
+            #Colonne premier sens
+            for a in range(i+1, len(input)):
+                tree = input[a][j]
+                max_tree += 1
+                if tree >= base_tree:
+                   break
 
-    return num_visible_trees
+            score *= max_tree
+            max_tree = 0
 
+            #Colonne deuxieme sens
+            for a in range(i-1, -1, -1):
+                tree = input[a][j]
+                max_tree += 1
+                if tree >= base_tree:
+                   break
+            score *= max_tree
 
+            best = max(score, best)
 
-num_visible_trees = num_visible_trees(data)
-print(num_visible_trees)
-# 447 too low
-# 590 too low
+    print(best)
 
-#min = 99*2 + 97*2
+puzzl1()
+puzzle2()
