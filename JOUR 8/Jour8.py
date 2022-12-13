@@ -1,5 +1,5 @@
 import os
-os.chdir("/Users/anto/Desktop/Advent of Code/Advent-of-Code/JOUR 8")
+os.chdir("/Users/anto/Desktop/Advent-of-Code/JOUR 8")
 
 with open("input.txt") as f:
     data = "\n".join([line.strip() for line in f])
